@@ -40,3 +40,5 @@ yarn-error.log*
 # Testing
 coverage/
 .nyc_output/
+frontend/yarn.lock
+backend/yarn.lock

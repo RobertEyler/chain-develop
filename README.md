@@ -87,12 +87,23 @@ npm run start:prod
 1. 在 Cloudflare Dashboard 中创建新的 Pages 项目
 2. 连接你的 Git 仓库
 3. 设置构建配置：
-   - **构建命令**: `cd frontend && npm run build`
+   - **框架预设**: `None` 或 `Vite`
+   - **构建命令**: `cd frontend && npm install && npm run build`（⚠️ 强烈推荐使用 npm，避免 Yarn lockfile 问题）
    - **构建输出目录**: `frontend/dist`
-   - **根目录**: `frontend`
+   - **根目录**: `frontend`（可选）
+   - **部署命令**: ⚠️ **留空**（Cloudflare Pages 会自动部署，不需要 wrangler deploy）
 4. 添加环境变量：
-   - `VITE_TELEGRAM_LINK`: 你的 Telegram 用户链接
-5. 部署
+   - `VITE_API_URL`: 后端 API 地址（例如：`https://liandao.org/api`）
+   - `VITE_TELEGRAM_LINK`: 你的 Telegram 用户链接（例如：`https://t.me/tom_cat666`）
+5. 保存并部署
+
+**⚠️ 重要提示**：
+- ❌ **不要设置部署命令**：Cloudflare Pages 会自动部署构建输出，不需要 `wrangler deploy`
+- ❌ **不要使用 `cd ./fronted`**：这是拼写错误，应该是 `frontend`
+- ✅ 确保构建命令正确：`cd frontend && yarn build`
+- ✅ 确保构建输出目录正确：`frontend/dist`
+
+详细部署说明请参考 `CLOUDFLARE_DEPLOY.md`
 
 ## 功能特性
 
