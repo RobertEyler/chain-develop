@@ -1,0 +1,4 @@
+# Cloudflare Pages SPA 路由重定向规则
+# 所有未匹配的路径都重定向到 index.html，支持客户端路由
+
+/*    /index.html   200

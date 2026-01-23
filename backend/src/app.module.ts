@@ -1,0 +1,18 @@
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { AssessmentModule } from './assessment/assessment.module';
+import * as path from 'path';
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: [
+        path.resolve(process.cwd(), '.env'),
+        path.resolve(__dirname, '..', '.env'),
+      ],
+    }),
+    AssessmentModule,
+  ],
+})
+export class AppModule {}
