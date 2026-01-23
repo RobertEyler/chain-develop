@@ -7,11 +7,22 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    // 确保生成静态文件
     rollupOptions: {
       output: {
         manualChunks: undefined
       }
+    },
+    commonjsOptions: {
+      transformMixedEsModules: true
+    }
+  },
+  ssr: {
+    noExternal: ['react-helmet-async']
+  },
+  optimizeDeps: {
+    include: ['react-helmet-async'],
+    esbuildOptions: {
+      mainFields: ['module', 'main']
     }
   },
   // 确保所有路由都指向 index.html（用于静态部署）
