@@ -7,7 +7,6 @@ chain-develop/
 ├── frontend/          # 前端项目 (React + Vite)
 ├── backend/           # 后端项目 (NestJS)
 ├── cloudflare.json    # Cloudflare Pages 配置
-├── wrangler.toml      # Cloudflare Workers 配置（可选）
 └── README.md
 ```
 
@@ -74,10 +73,7 @@ npm run start:prod
 1. **`frontend/public/_redirects`** - SPA 路由重定向规则
    - 所有未匹配的路径都会重定向到 `index.html`，支持客户端路由
 
-2. **`wrangler.toml`** - Cloudflare Workers 配置（可选）
-   - 如果使用 Cloudflare Workers，需要此文件
-
-3. **`cloudflare.json`** - Cloudflare Pages 构建配置
+2. **`cloudflare.json`** - Cloudflare Pages 构建配置
    - 指定构建命令和输出目录
    - 配置安全头
    - 配置重定向规则
@@ -88,7 +84,7 @@ npm run start:prod
 2. 连接你的 Git 仓库
 3. 设置构建配置：
    - **框架预设**: `None` 或 `Vite`
-   - **构建命令**: `cd frontend && npm install && npm run build`（⚠️ 强烈推荐使用 npm，避免 Yarn lockfile 问题）
+   - **构建命令**: `cd frontend && rm -rf node_modules package-lock.json && npm install && npm run build`（⚠️ 强烈推荐使用 npm，避免 Yarn lockfile 和 Rollup 可选依赖问题）
    - **构建输出目录**: `frontend/dist`
    - **根目录**: `frontend`（可选）
    - **部署命令**: ⚠️ **留空**（Cloudflare Pages 会自动部署，不需要 wrangler deploy）
@@ -100,7 +96,9 @@ npm run start:prod
 **⚠️ 重要提示**：
 - ❌ **不要设置部署命令**：Cloudflare Pages 会自动部署构建输出，不需要 `wrangler deploy`
 - ❌ **不要使用 `cd ./fronted`**：这是拼写错误，应该是 `frontend`
-- ✅ 确保构建命令正确：`cd frontend && yarn build`
+- ❌ **不要使用 yarn**：Cloudflare Pages 构建环境默认只有 npm，没有 yarn
+- ❌ **删除 `wrangler.toml`**：如果项目根目录有 `wrangler.toml` 文件，请删除它（Pages 不需要，会导致 "Missing entry-point" 错误）
+- ✅ 确保构建命令正确：`cd frontend && rm -rf node_modules package-lock.json && npm install && npm run build`
 - ✅ 确保构建输出目录正确：`frontend/dist`
 
 详细部署说明请参考 `CLOUDFLARE_DEPLOY.md`
