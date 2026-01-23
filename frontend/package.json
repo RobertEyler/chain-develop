@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite-react-ssg dev",
-    "build": "vite-react-ssg build",
+    "build": "vite-react-ssg build && npm run build:copy-routes",
+    "build:copy-routes": "node scripts/copy-routes.js",
     "preview": "vite preview"
   },
   "dependencies": {
