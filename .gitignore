@@ -44,3 +44,8 @@ frontend/yarn.lock
 backend/yarn.lock
 frontend/package-lock.json
 backend/package-lock.json
+
+# Cloudflare Workers (not needed for Pages)
+wrangler.toml
+wrangler.jsonc
+wrangler.json
