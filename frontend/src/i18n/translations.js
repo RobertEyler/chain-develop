@@ -25,9 +25,9 @@ export const translations = {
     },
     // 首页
     home: {
-      title: 'BuildWeb3 - Web3 Project Technical Assessment',
-      description: 'Support up to 5 Web3 projects per month, providing professional technical assessment and consulting services. Get assessment in 2 minutes, view sample reports.',
-      keywords: 'Web3, Blockchain, Technical Assessment, Project Consulting, Blockchain Development',
+      title: 'Enterprise Blockchain & Web3 Development Services | BuildWeb3',
+      description: 'Professional enterprise blockchain development services and web3 development services. Support up to 5 Web3 projects per month with technical assessment and consulting. Get assessment in 2 minutes.',
+      keywords: 'enterprise blockchain development services, web3 development services, blockchain smart contract development services, solana blockchain development services, blockchain development services',
       brand: 'BuildWeb3',
     },
     // 限量服务
@@ -326,9 +326,9 @@ export const translations = {
     },
     // 首页
     home: {
-      title: 'BuildWeb3 - Web3项目技术评估',
-      description: '每月最多支持5个Web3项目，提供专业的技术评估和咨询服务。2分钟获取评估，查看示例报告。',
-      keywords: 'Web3,区块链,技术评估,项目咨询,区块链开发',
+      title: '企业区块链开发服务 | Web3开发服务 | BuildWeb3',
+      description: '专业的企业区块链开发服务和Web3开发服务。每月最多支持5个Web3项目，提供技术评估和咨询服务。2分钟获取评估。',
+      keywords: '企业区块链开发服务,web3开发服务,区块链智能合约开发服务,Solana区块链开发服务,区块链开发服务',
       brand: 'BuildWeb3',
     },
     // 限量服务
@@ -627,9 +627,9 @@ export const translations = {
     },
     // 首页
     home: {
-      title: 'BuildWeb3 - Web3項目技術評估',
-      description: '每月最多支持5個Web3項目，提供專業的技術評估和諮詢服務。2分鐘獲取評估，查看示例報告。',
-      keywords: 'Web3,區塊鏈,技術評估,項目諮詢,區塊鏈開發',
+      title: '企業區塊鏈開發服務 | Web3開發服務 | BuildWeb3',
+      description: '專業的企業區塊鏈開發服務和Web3開發服務。每月最多支持5個Web3項目，提供技術評估和諮詢服務。2分鐘獲取評估。',
+      keywords: '企業區塊鏈開發服務,web3開發服務,區塊鏈智能合約開發服務,Solana區塊鏈開發服務,區塊鏈開發服務',
       brand: 'BuildWeb3',
     },
     // 限量服务
