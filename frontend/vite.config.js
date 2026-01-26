@@ -17,7 +17,11 @@ export default defineConfig({
     }
   },
   ssr: {
-    noExternal: ['react-helmet-async']
+    noExternal: ['react-helmet-async'],
+    // 抑制 useLayoutEffect 警告（这些警告不影响功能）
+    resolve: {
+      conditions: ['development', 'browser']
+    }
   },
   optimizeDeps: {
     include: ['react-helmet-async'],

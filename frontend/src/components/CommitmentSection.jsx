@@ -1,52 +1,32 @@
 import { useState } from 'react'
+import { useLanguage } from '../i18n/LanguageContext'
+import { useSafeNavigate } from '../utils/useSafeNavigate'
 
 function CommitmentSection() {
+  const { t, getPathWithLanguage } = useLanguage()
+  const navigate = useSafeNavigate()
+  
   const steps = [
     {
-      title: '关于透明度',
-      options: [
-        '我理解项目需要透明沟通',
-        '我愿意分享项目真实情况',
-        '我认同透明度有助于项目成功',
-        '我准备好进行开放对话'
-      ]
+      title: t('commitment.transparency.title'),
+      options: t('commitment.transparency.options'),
     },
     {
-      title: '项目角色',
-      options: [
-        '我是项目的创始人/联合创始人',
-        '我是项目的核心决策者',
-        '我有项目的主要决策权',
-        '我可以代表项目做决定'
-      ]
+      title: t('commitment.role.title'),
+      options: t('commitment.role.options'),
     },
     {
-      title: '项目目标',
-      options: [
-        '我希望获得专业指导',
-        '我想避免常见的技术陷阱',
-        '我希望能节省开发时间',
-        '我重视专业建议的价值'
-      ]
+      title: t('commitment.goal.title'),
+      options: t('commitment.goal.options'),
     },
     {
-      title: '准备情况',
-      options: [
-        '我已经准备好项目基本信息',
-        '我可以提供项目技术需求',
-        '我了解项目的预算范围',
-        '我已经准备好开始评估'
-      ]
+      title: t('commitment.preparation.title'),
+      options: t('commitment.preparation.options'),
     },
     {
-      title: '下一步行动',
-      options: [
-        '我准备好进入下一步',
-        '我理解评估流程',
-        '我愿意投入时间配合',
-        '我期待获得评估结果'
-      ]
-    }
+      title: t('commitment.action.title'),
+      options: t('commitment.action.options'),
+    },
   ]
 
   const [currentStep, setCurrentStep] = useState(0)
@@ -54,7 +34,6 @@ function CommitmentSection() {
 
   const handleOptionSelect = (stepIndex, optionIndex) => {
     setSelectedOptions(prev => {
-      // 单选：直接设置选中的选项索引
       return {
         ...prev,
         [stepIndex]: prev[stepIndex] === optionIndex ? null : optionIndex
@@ -82,16 +61,20 @@ function CommitmentSection() {
   ).length
   const allStepsCompleted = completedSteps === steps.length
 
+  const goToAssessment = () => {
+    navigate(getPathWithLanguage('assessment'))
+  }
+
   return (
     <section className="py-12 md:py-16 bg-white">
       <div className="max-w-4xl mx-auto px-5">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-8">开始之前，请确认</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-8">{t('commitment.title')}</h2>
         
         {/* 进度条 */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm text-gray-600">步骤 {currentStep + 1} / {steps.length}</span>
-            <span className="text-sm text-gray-600">已完成 {completedSteps} / {steps.length}</span>
+            <span className="text-sm text-gray-600">{t('commitment.step')} {currentStep + 1} {t('commitment.of')} {steps.length}</span>
+            <span className="text-sm text-gray-600">{t('commitment.completed')} {completedSteps} {t('commitment.of')} {steps.length}</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
@@ -155,7 +138,7 @@ function CommitmentSection() {
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
             }`}
           >
-            上一步
+            {t('common.prev')}
           </button>
           
           <div className="flex gap-2">
@@ -170,7 +153,7 @@ function CommitmentSection() {
                     ? 'bg-green-500'
                     : 'bg-gray-300'
                 }`}
-                title={`步骤 ${index + 1}`}
+                title={`${t('commitment.step')} ${index + 1}`}
               />
             ))}
           </div>
@@ -178,8 +161,7 @@ function CommitmentSection() {
           <button
             onClick={() => {
               if (allStepsCompleted && isLastStep) {
-                // 所有步骤完成，跳转到评估页面
-                window.location.pathname = '/assessment'
+                goToAssessment()
               } else {
                 handleNextStep()
               }
@@ -191,7 +173,7 @@ function CommitmentSection() {
                 : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl'
             }`}
           >
-            {allStepsCompleted && isLastStep ? '免费获得专业的技术评估' : isLastStep ? '完成' : '下一步'}
+            {allStepsCompleted && isLastStep ? t('commitment.getFreeAssessment') : isLastStep ? t('common.submit') : t('common.next')}
           </button>
         </div>
 
@@ -206,7 +188,7 @@ function CommitmentSection() {
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="font-semibold">所有步骤已完成！</span>
+              <span className="font-semibold">{t('commitment.allStepsCompleted')}</span>
             </div>
           </div>
         )}

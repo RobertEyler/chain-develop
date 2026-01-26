@@ -34,9 +34,12 @@
 
 5. **部署命令**: 
    ```
-   （留空，不要填写任何内容）
+   （留空，不要填写任何内容，包括空格）
    ```
-   ⚠️ **重要**：Cloudflare Pages 会自动部署构建输出，不需要 `wrangler deploy` 命令
+   ⚠️ **重要**：
+   - Cloudflare Pages 会自动部署构建输出，不需要 `wrangler deploy` 命令
+   - 如果部署命令字段有任何内容（包括空格），会导致 "Missing entry-point" 错误
+   - 确保该字段完全为空
 
 ### 环境变量
 
@@ -80,10 +83,23 @@
 #### 错误 4: Wrangler 入口点错误
 如果遇到 `Missing entry-point to Worker script or to assets directory` 错误：
 
-**解决方案**：删除项目根目录下的 `wrangler.toml` 文件
-- Cloudflare Pages 会自动检测 `wrangler.toml` 并尝试部署 Worker
-- 但 Pages 部署不需要这个文件，应该删除它
-- 如果使用 Cloudflare Workers，才需要 `wrangler.toml`
+**解决方案**：
+1. **检查部署命令字段**：在 Cloudflare Dashboard 的 Pages 设置中，确保"部署命令"字段完全为空（不要有任何内容，包括空格）
+2. **删除 `wrangler.toml` 文件**：
+   - 如果本地有 `wrangler.toml`，删除它
+   - 如果文件已提交到 Git，需要从 Git 中删除：
+     ```bash
+     git rm wrangler.toml
+     git commit -m "Remove wrangler.toml for Pages deployment"
+     git push
+     ```
+3. **检查其他配置文件**：确保没有 `wrangler.jsonc` 或其他 wrangler 配置文件
+4. **重新部署**：删除文件并提交后，重新触发部署
+
+**原因**：
+- Cloudflare Pages 会自动检测 `wrangler.toml` 或 `wrangler.jsonc` 并尝试部署 Worker
+- 但 Pages 部署不需要这些文件，应该删除它们
+- 如果使用 Cloudflare Workers，才需要这些配置文件
 
 ## 验证部署
 

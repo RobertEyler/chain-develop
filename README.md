@@ -70,10 +70,7 @@ npm run start:prod
 
 ### 配置文件说明
 
-1. **`frontend/public/_redirects`** - SPA 路由重定向规则
-   - 所有未匹配的路径都会重定向到 `index.html`，支持客户端路由
-
-2. **`cloudflare.json`** - Cloudflare Pages 构建配置
+1. **`cloudflare.json`** - Cloudflare Pages 构建配置
    - 指定构建命令和输出目录
    - 配置安全头
    - 配置重定向规则

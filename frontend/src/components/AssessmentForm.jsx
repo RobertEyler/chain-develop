@@ -1,79 +1,42 @@
 import { useState, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
+import { useLanguage } from '../i18n/LanguageContext'
+import { useSafeNavigate } from '../utils/useSafeNavigate'
+import { apiFetch } from '../utils/api'
 
 function AssessmentForm() {
+  const { t, getPathWithLanguage } = useLanguage()
+  const navigate = useSafeNavigate()
   const [submitting, setSubmitting] = useState(false)
   const [assessmentResult, setAssessmentResult] = useState('')
   const [showResult, setShowResult] = useState(false)
   const [isStreaming, setIsStreaming] = useState(false)
+  
   const steps = [
     {
-      title: '你的项目是什么链',
-      options: [
-        'Ethereum',
-        'Polygon',
-        'BSC (Binance Smart Chain)',
-        'Arbitrum',
-        'Optimism',
-        'Avalanche',
-        'Solana',
-        '其他'
-      ]
+      title: t('assessment.questions.chain.title'),
+      options: t('assessment.questions.chain.options'),
     },
     {
-      title: '你的项目什么类型',
-      options: [
-        'DeFi (去中心化金融)',
-        'NFT (非同质化代币)',
-        'GameFi (游戏化金融)',
-        'DAO (去中心化自治组织)',
-        'Web3 基础设施',
-        '跨链桥接',
-        'Layer 2 解决方案',
-        '其他'
-      ]
+      title: t('assessment.questions.projectType.title'),
+      options: t('assessment.questions.projectType.options'),
     },
     {
-      title: '项目收益来自哪里',
-      options: [
-        '交易手续费',
-        '代币发行与销售',
-        '流动性挖矿奖励',
-        'NFT 交易佣金',
-        '订阅或会员费用',
-        '广告收入',
-        '其他'
-      ]
+      title: t('assessment.questions.revenueSource.title'),
+      options: t('assessment.questions.revenueSource.options'),
     },
     {
-      title: '你的项目现在处于哪个阶段',
-      options: [
-        '概念阶段（只有想法）',
-        '开发阶段（正在开发中）',
-        '测试阶段（测试网运行）',
-        '主网上线（已上线）',
-        '运营阶段（已有用户）'
-      ]
+      title: t('assessment.questions.projectStage.title'),
+      options: t('assessment.questions.projectStage.options'),
     },
     {
-      title: '了解核心目标/需求',
-      options: [
-        '融资（寻求投资）',
-        '技术落地（实现技术方案）',
-        '社区增长（扩大用户基础）',
-        '产品优化（改进现有产品）',
-        '安全审计（确保项目安全）',
-        '市场推广（提升品牌知名度）'
-      ]
+      title: t('assessment.questions.coreGoal.title'),
+      options: t('assessment.questions.coreGoal.options'),
     },
     {
-      title: '风险偏好',
-      options: [
-        '保守型（优先安全性，愿意牺牲一些创新）',
-        '平衡型（在安全性和创新之间平衡）',
-        '激进型（追求创新，愿意承担更高风险）'
-      ]
-    }
+      title: t('assessment.questions.riskPreference.title'),
+      options: t('assessment.questions.riskPreference.options'),
+    },
   ]
 
   const [currentStep, setCurrentStep] = useState(0)
@@ -140,15 +103,9 @@ function AssessmentForm() {
       
       console.log('📤 Submitting assessment data:', assessmentData)
       
-      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
-      console.log('🌐 API URL:', `${API_BASE_URL}/assessment`)
-      
       // 提交评估（流式输出）
-      const response = await fetch(`${API_BASE_URL}/assessment`, {
+      const response = await apiFetch('/assessment', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(assessmentData),
       })
       
@@ -168,7 +125,7 @@ function AssessmentForm() {
         // 如果是限流错误（429），显示友好提示
         if (response.status === 429 && errorData) {
           setShowResult(true)
-          setAssessmentResult(`## ⚠️ 今日评估次数已用完\n\n**${errorData.message}**\n\n${errorData.tip ? `💡 ${errorData.tip}` : '⏰ 请明天再试'}\n\n---\n\n### 💬 需要更多评估？\n\n如需更多评估服务，请联系我们的专业客服获取帮助。`)
+          setAssessmentResult(`## ⚠️ ${t('errors.rateLimit')}\n\n**${errorData.message}**\n\n${errorData.tip ? `💡 ${errorData.tip}` : `⏰ ${t('errors.rateLimitTip')}`}\n\n---\n\n### 💬 ${t('assessment.moreAssessment')}\n\n${t('assessment.contactProfessional')}`)
           setIsStreaming(false)
           setSubmitting(false)
           return
@@ -252,32 +209,29 @@ function AssessmentForm() {
         <div className="mb-8">
           <button
             onClick={() => {
-              // 使用 history API 进行流畅的页面切换
-              window.history.pushState({}, '', '/')
-              // 触发 popstate 事件，让 App.jsx 的路由监听器更新页面
-              window.dispatchEvent(new PopStateEvent('popstate'))
+              navigate(getPathWithLanguage(''))
             }}
             className="inline-flex items-center gap-2 text-gray-600 hover:text-indigo-600 transition-colors duration-200 group"
           >
             <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            <span className="font-medium">返回首页</span>
+            <span className="font-medium">{t('common.backToHome')}</span>
           </button>
         </div>
         
         {!showResult && (
           <>
             <div className="text-center mb-8">
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">专业的技术评估</h1>
-              <p className="text-lg text-gray-600">请回答以下问题，帮助我们更好地了解您的项目需求</p>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{t('assessment.title')}</h1>
+              <p className="text-lg text-gray-600">{t('assessment.subtitle')}</p>
             </div>
             
             {/* 进度条 */}
             <div className="mb-8">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-gray-600">步骤 {currentStep + 1} / {steps.length + 1}</span>
-                <span className="text-sm text-gray-600">已完成 {completedSteps} / {steps.length}</span>
+                <span className="text-sm text-gray-600">{t('assessment.step')} {currentStep + 1} {t('assessment.of')} {steps.length + 1}</span>
+                <span className="text-sm text-gray-600">{t('assessment.completed')} {completedSteps} {t('assessment.of')} {steps.length}</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
                 <div
@@ -290,23 +244,23 @@ function AssessmentForm() {
             {/* 当前步骤 */}
             <div className="bg-white rounded-xl p-6 md:p-8 mb-6 shadow-md">
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 text-center">
-                {currentStep === steps.length ? '项目简介' : steps[currentStep].title}
+                {currentStep === steps.length ? t('assessment.projectDescription') : steps[currentStep].title}
               </h3>
               
               {currentStep === steps.length ? (
                 // 项目简介文本输入
                 <div className="space-y-4">
                   <p className="text-gray-600 text-center mb-4">
-                    请简要描述您的项目，包括项目目标、核心功能、目标用户等信息（可选，但建议填写以获得更准确的评估）
+                    {t('assessment.projectDescriptionHint')}
                   </p>
                   <textarea
                     value={projectDescription}
                     onChange={(e) => setProjectDescription(e.target.value)}
-                    placeholder="例如：我们正在开发一个基于以太坊的 DeFi 借贷平台，主要面向中小企业和个人用户，提供去中心化的借贷服务..."
+                    placeholder={t('assessment.projectDescriptionPlaceholder')}
                     className="w-full h-48 p-4 border-2 border-gray-200 rounded-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all resize-none text-gray-700"
                   />
                   <div className="text-sm text-gray-500 text-right">
-                    {projectDescription.length} 字符
+                    {projectDescription.length} {t('assessment.characters')}
                   </div>
                 </div>
               ) : (
@@ -351,17 +305,17 @@ function AssessmentForm() {
 
             {/* 导航按钮 */}
             <div className="flex justify-between items-center">
-              <button
-                onClick={handlePrevStep}
-                disabled={currentStep === 0}
-                className={`px-6 py-3 rounded-lg font-semibold transition-all ${
-                  currentStep === 0
-                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
-              >
-                上一步
-              </button>
+                <button
+                  onClick={handlePrevStep}
+                  disabled={currentStep === 0}
+                  className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                    currentStep === 0
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  }`}
+                >
+                  {t('common.prev')}
+                </button>
               
               <div className="flex gap-2">
                 {steps.map((_, index) => (
@@ -402,7 +356,7 @@ function AssessmentForm() {
                       : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl'
                   }`}
                 >
-                  {submitting ? '提交中...' : '提交评估'}
+                  {submitting ? t('common.submitting') : t('assessment.submitAssessment')}
                 </button>
               ) : (
                 <button
@@ -414,7 +368,7 @@ function AssessmentForm() {
                       : 'bg-indigo-600 text-white hover:bg-indigo-700'
                   }`}
                 >
-                  下一步
+                  {t('common.next')}
                 </button>
               )}
             </div>
@@ -430,7 +384,7 @@ function AssessmentForm() {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <span className="font-semibold">所有信息已填写完成！请点击"提交评估"完成申请。</span>
+                  <span className="font-semibold">{t('assessment.allStepsCompleted')}</span>
                 </div>
               </div>
             )}
@@ -441,9 +395,9 @@ function AssessmentForm() {
         {showResult && (
           <>
             <div className="text-center mb-8">
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">评估结果</h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{t('assessment.resultTitle')}</h1>
               <p className="text-lg text-gray-600">
-                {isStreaming ? 'AI 正在生成评估...' : '基于您提供的信息，AI已为您生成专业评估'}
+                {isStreaming ? t('assessment.generating') : t('assessment.resultSubtitle')}
               </p>
             </div>
             
@@ -480,7 +434,7 @@ function AssessmentForm() {
                   ) : (
                     <div className="flex items-center gap-2 text-gray-500">
                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-indigo-600"></div>
-                      <span>等待 AI 生成评估...</span>
+                      <span>{t('assessment.waiting')}</span>
                     </div>
                   )}
                   {isStreaming && (
@@ -493,7 +447,7 @@ function AssessmentForm() {
             <div className="mt-6 pt-6 border-t border-gray-200">
               <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-6 border-2 border-indigo-200">
                 <p className="text-center text-gray-700 mb-4 text-lg font-medium">
-                  更多真人亲自评估，请联系专业客服
+                  {t('assessment.moreAssessment')}
                 </p>
                 <div className="text-center">
                   <a
@@ -506,7 +460,7 @@ function AssessmentForm() {
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                       </svg>
-                      联系专业客服
+                      {t('assessment.contactProfessional')}
                     </button>
                   </a>
                 </div>
