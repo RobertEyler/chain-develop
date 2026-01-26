@@ -47,11 +47,41 @@ function Layout({ children }) {
   const location = useLocation()
   const navigate = useSafeNavigate()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
   
   const isHomePage = location.pathname === '/' || 
     location.pathname === '/zh-CN' || 
     location.pathname === '/zh-TW' ||
     !location.pathname.includes('/assessment')
+
+  // 滚动监听：向下滚动隐藏，向上滚动显示
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      
+      // 在页面顶部时始终显示
+      if (currentScrollY < 10) {
+        setIsHeaderVisible(true)
+      } else {
+        // 向下滚动隐藏，向上滚动显示
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+          // 向下滚动超过 100px 时隐藏
+          setIsHeaderVisible(false)
+        } else if (currentScrollY < lastScrollY) {
+          // 向上滚动时显示
+          setIsHeaderVisible(true)
+        }
+      }
+      
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
 
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -66,7 +96,11 @@ function Layout({ children }) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-4 shadow-lg sticky top-0 z-50">
+      <header 
+        className={`bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-4 shadow-lg sticky top-0 z-50 transition-transform duration-300 ${
+          isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-5">
           <div className="flex items-center justify-between">
             {/* Logo */}
