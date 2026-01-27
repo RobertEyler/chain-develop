@@ -8,6 +8,8 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const distDir = join(__dirname, '..', 'dist')
 
+const SITE_BASE = process.env.SITE_URL || 'https://buildweb3.io'
+
 // 从 translations.js 读取 SEO 内容配置
 const seoContent = {
   en: {
@@ -30,7 +32,7 @@ const seoContent = {
   },
 }
 
-// 需要生成的路由（包括多语言路由）
+// 需要生成的路由（包括多语言路由）；根路径 / 由 vite 输出，不复制
 const routes = [
   { path: '/assessment', lang: 'en' },
   { path: '/zh-CN', lang: 'zh-CN' },
@@ -38,6 +40,8 @@ const routes = [
   { path: '/zh-TW', lang: 'zh-TW' },
   { path: '/zh-TW/assessment', lang: 'zh-TW' },
 ]
+
+const sitemapPaths = ['/', '/assessment', '/zh-CN', '/zh-CN/assessment', '/zh-TW', '/zh-TW/assessment']
 
 async function copyRoutes() {
   try {
@@ -89,6 +93,29 @@ async function copyRoutes() {
       
       console.log(`✓ Generated static page: ${route.path} (${route.lang})`)
     }
+
+    const lastmod = new Date().toISOString().slice(0, 10)
+
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapPaths.map((p) => `  <url>
+    <loc>${SITE_BASE}${p === '/' ? '/' : p}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>${p === '/' ? '1.0' : '0.8'}</priority>
+  </url>`).join('\n')}
+</urlset>
+`
+    await writeFile(join(distDir, 'sitemap.xml'), sitemap, 'utf-8')
+    console.log('✓ Generated sitemap.xml')
+
+    const robots = `User-agent: *
+Allow: /
+
+Sitemap: ${SITE_BASE}/sitemap.xml
+`
+    await writeFile(join(distDir, 'robots.txt'), robots, 'utf-8')
+    console.log('✓ Generated robots.txt')
     
     console.log('✓ All routes copied successfully')
   } catch (error) {
