@@ -10,36 +10,43 @@ function ProjectsCarousel() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % projects.length)
-    }, 3000)
+    }, 4000)
     return () => clearInterval(timer)
   }, [projects.length])
 
   return (
-    <div className="relative bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-6 h-full">
-      <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">{t('authority.projects')}</h3>
-      <div className="relative h-64 overflow-hidden rounded-lg">
+    <div className="glass-card rounded-2xl p-6 md:p-8 h-full">
+      <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-3">
+        <span className="w-8 h-8 rounded-lg bg-primary-muted flex items-center justify-center">
+          <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+          </svg>
+        </span>
+        {t('authority.projects')}
+      </h3>
+      <div className="relative h-56 overflow-hidden rounded-xl">
         {projects.map((project, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-500 ${
-              index === currentIndex ? 'opacity-100' : 'opacity-0'
+            className={`absolute inset-0 transition-all duration-500 ${
+              index === currentIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            <div className="bg-white rounded-lg p-6 shadow-lg h-full flex flex-col justify-center">
-              <div className="text-sm text-indigo-600 font-semibold mb-2">{project.type}</div>
-              <h4 className="text-xl font-bold text-gray-900 mb-2">{project.name}</h4>
-              <p className="text-gray-600">{project.desc}</p>
+            <div className="bg-background-tertiary rounded-xl p-6 h-full flex flex-col justify-center border border-border">
+              <div className="text-xs text-primary font-medium uppercase tracking-wider mb-2">{project.type}</div>
+              <h4 className="text-xl font-semibold text-foreground mb-3">{project.name}</h4>
+              <p className="text-foreground-muted text-sm leading-relaxed">{project.desc}</p>
             </div>
           </div>
         ))}
       </div>
-      <div className="flex justify-center gap-2 mt-4">
+      <div className="flex justify-center gap-2 mt-6">
         {projects.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`h-2 rounded-full transition-all ${
-              index === currentIndex ? 'w-8 bg-indigo-600' : 'w-2 bg-gray-300'
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              index === currentIndex ? 'w-8 bg-primary' : 'w-1.5 bg-border-hover hover:bg-foreground-subtle'
             }`}
           />
         ))}
@@ -52,38 +59,32 @@ function ProjectsCarousel() {
 function FundsDisplay() {
   const { t } = useLanguage()
   const fundsList = t('authority.fundsList')
-  const funds = fundsList.map((fund, index) => ({
-    ...fund,
-    color: [
-      'from-blue-500 to-cyan-500',
-      'from-purple-500 to-pink-500',
-      'from-green-500 to-emerald-500'
-    ][index]
-  }))
 
   return (
-    <div className="relative bg-white rounded-xl p-8 h-full flex items-center justify-center">
-      <div className="text-center">
-        <div className="relative mb-8">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-48 h-48 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 opacity-20 animate-pulse"></div>
-          </div>
-          <div className="relative z-10">
-            <p className="text-5xl md:text-6xl font-bold text-indigo-600 mb-2">{t('authority.totalFunds')}</p>
-            <p className="text-gray-600 text-lg">{t('authority.funds')}</p>
-          </div>
+    <div className="glass-card rounded-2xl p-6 md:p-8 h-full flex flex-col">
+      <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-3">
+        <span className="w-8 h-8 rounded-lg bg-accent-muted flex items-center justify-center">
+          <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </span>
+        {t('authority.funds')}
+      </h3>
+      
+      <div className="flex-1 flex flex-col justify-center">
+        <div className="text-center mb-8">
+          <p className="text-5xl md:text-6xl font-bold gradient-text mb-2">{t('authority.totalFunds')}</p>
+          <p className="text-foreground-subtle text-sm">{t('authority.fundsDesc') || 'Total Value Managed'}</p>
         </div>
         
-        <div className="space-y-4 mt-8">
-          {funds.map((fund, index) => (
+        <div className="space-y-3">
+          {fundsList.map((fund, index) => (
             <div
               key={index}
-              className={`bg-gradient-to-r ${fund.color} text-white rounded-lg p-4 shadow-md transform hover:scale-105 transition-transform`}
+              className="flex items-center justify-between p-4 rounded-xl bg-background-tertiary border border-border hover:border-border-hover transition-colors"
             >
-              <div className="flex justify-between items-center">
-                <span className="font-medium">{fund.label}</span>
-                <span className="font-bold text-lg">{fund.amount}</span>
-              </div>
+              <span className="text-foreground-muted text-sm">{fund.label}</span>
+              <span className="font-semibold text-foreground">{fund.amount}</span>
             </div>
           ))}
         </div>
@@ -99,41 +100,62 @@ function SuccessCases() {
     {
       title: t('authority.case1.title'),
       desc: t('authority.case1.desc'),
-      icon: '📈',
-      color: 'from-green-400 to-emerald-500'
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+        </svg>
+      ),
     },
     {
       title: t('authority.case2.title'),
       desc: t('authority.case2.desc'),
-      icon: '🔒',
-      color: 'from-blue-400 to-cyan-500'
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      ),
     },
     {
       title: t('authority.case3.title'),
       desc: t('authority.case3.desc'),
-      icon: '🎨',
-      color: 'from-purple-400 to-pink-500'
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+        </svg>
+      ),
     },
     {
       title: t('authority.case4.title'),
       desc: t('authority.case4.desc'),
-      icon: '🌉',
-      color: 'from-orange-400 to-red-500'
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+        </svg>
+      ),
     }
   ]
 
   return (
-    <div className="bg-white rounded-xl p-6 h-full">
-      <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">{t('authority.successCases')}</h3>
+    <div className="glass-card rounded-2xl p-6 md:p-8 h-full">
+      <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-3">
+        <span className="w-8 h-8 rounded-lg bg-primary-muted flex items-center justify-center">
+          <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+          </svg>
+        </span>
+        {t('authority.successCases')}
+      </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {cases.map((caseItem, index) => (
           <div
             key={index}
-            className={`bg-gradient-to-br ${caseItem.color} text-white rounded-lg p-4 shadow-lg transform hover:scale-105 transition-transform`}
+            className="group p-5 rounded-xl bg-background-tertiary border border-border hover:border-primary/30 transition-all duration-300"
           >
-            <div className="text-3xl mb-2">{caseItem.icon}</div>
-            <h4 className="font-bold text-lg mb-2">{caseItem.title}</h4>
-            <p className="text-sm text-white/90">{caseItem.desc}</p>
+            <div className="w-10 h-10 rounded-lg bg-primary-muted flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform">
+              {caseItem.icon}
+            </div>
+            <h4 className="font-semibold text-foreground mb-2">{caseItem.title}</h4>
+            <p className="text-sm text-foreground-muted leading-relaxed">{caseItem.desc}</p>
           </div>
         ))}
       </div>
@@ -147,54 +169,35 @@ function TeamDisplay() {
   const team = t('authority.teamList')
 
   return (
-    <div className="relative bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl p-6 md:p-8 h-full">
-      <h3 className="text-xl font-bold text-gray-900 mb-6 md:mb-8 text-center">{t('authority.team')}</h3>
+    <div className="glass-card rounded-2xl p-6 md:p-8 h-full">
+      <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-3">
+        <span className="w-8 h-8 rounded-lg bg-accent-muted flex items-center justify-center">
+          <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        </span>
+        {t('authority.team')}
+      </h3>
       
-      {/* 移动端：垂直布局 */}
-      <div className="md:hidden space-y-4">
+      <div className="space-y-4">
         {team.map((member, index) => (
           <div
             key={index}
-            className="bg-white rounded-lg p-4 shadow-lg transform hover:scale-105 transition-transform"
+            className="p-5 rounded-xl bg-background-tertiary border border-border hover:border-border-hover transition-all duration-300"
           >
-            <h4 className="font-bold text-gray-900 mb-1">{member.name}</h4>
-            <p className="text-sm text-indigo-600 font-semibold mb-1">{member.role}</p>
-            <p className="text-xs text-gray-600 mb-2">{member.experience}</p>
-            {member.skills && <p className="text-xs text-gray-700">{member.skills}</p>}
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0 border border-border">
+                <span className="text-lg font-semibold gradient-text">{member.name.charAt(0)}</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <h4 className="font-semibold text-foreground">{member.name}</h4>
+                <p className="text-sm text-primary font-medium mb-1">{member.role}</p>
+                <p className="text-xs text-foreground-muted">{member.experience}</p>
+                {member.skills && <p className="text-xs text-foreground-subtle mt-1">{member.skills}</p>}
+              </div>
+            </div>
           </div>
         ))}
-      </div>
-      
-      {/* 桌面端：围绕中心布局 */}
-      <div className="hidden md:block relative w-full h-80">
-        {/* 中心 */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-xl">
-            <span className="text-4xl">👥</span>
-          </div>
-        </div>
-        
-        {/* 团队成员围绕中心 */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-4 shadow-lg w-48 transform hover:scale-110 transition-transform z-20">
-          <h4 className="font-bold text-gray-900 mb-1">{team[0].name}</h4>
-          <p className="text-sm text-indigo-600 font-semibold mb-1">{team[0].role}</p>
-          <p className="text-xs text-gray-600 mb-2">{team[0].experience}</p>
-          {team[0].skills && <p className="text-xs text-gray-700">{team[0].skills}</p>}
-        </div>
-        
-        <div className="absolute bottom-8 left-4 translate-x-0 translate-y-0 bg-white rounded-lg p-4 shadow-lg w-48 transform hover:scale-110 transition-transform z-20">
-          <h4 className="font-bold text-gray-900 mb-1">{team[1].name}</h4>
-          <p className="text-sm text-indigo-600 font-semibold mb-1">{team[1].role}</p>
-          <p className="text-xs text-gray-600 mb-2">{team[1].experience}</p>
-          {team[1].skills && <p className="text-xs text-gray-700">{team[1].skills}</p>}
-        </div>
-        
-        <div className="absolute bottom-8 right-4 translate-x-0 translate-y-0 bg-white rounded-lg p-4 shadow-lg w-48 transform hover:scale-110 transition-transform z-20">
-          <h4 className="font-bold text-gray-900 mb-1">{team[2].name}</h4>
-          <p className="text-sm text-indigo-600 font-semibold mb-1">{team[2].role}</p>
-          <p className="text-xs text-gray-600 mb-2">{team[2].experience}</p>
-          {team[2].skills && <p className="text-xs text-gray-700">{team[2].skills}</p>}
-        </div>
       </div>
     </div>
   )
@@ -207,41 +210,55 @@ function ExperienceTimeline() {
   const skills = t('authority.skillsList')
 
   return (
-    <div className="bg-white rounded-xl p-6 h-full">
-      <div className="text-center mb-6">
-        <p className="text-4xl font-bold text-indigo-600 mb-2">{t('authority.experience')}</p>
-        <p className="text-gray-600">{t('authority.experienceDesc')}</p>
-      </div>
-      
-      <div className="relative">
-        {/* 时间线 */}
-        <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-indigo-200"></div>
-        
-        <div className="space-y-6">
-          {experiences.map((exp, index) => (
-            <div key={index} className="relative pl-12">
-              <div className="absolute left-2 w-4 h-4 bg-indigo-600 rounded-full border-4 border-white shadow-lg"></div>
-              <div className="bg-gray-50 rounded-lg p-4">
-                <div className="text-sm font-semibold text-indigo-600 mb-1">{exp.year}</div>
-                <h4 className="font-bold text-gray-900 mb-1">{exp.title}</h4>
-                <p className="text-sm text-gray-600">{exp.desc}</p>
+    <div className="glass-card rounded-2xl p-6 md:p-8">
+      <div className="flex flex-col lg:flex-row gap-8">
+        <div className="lg:w-1/3">
+          <div className="sticky top-24">
+            <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-3">
+              <span className="w-8 h-8 rounded-lg bg-primary-muted flex items-center justify-center">
+                <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </span>
+              {t('authority.experienceTitle') || 'Experience'}
+            </h3>
+            <p className="text-4xl md:text-5xl font-bold gradient-text mb-2">{t('authority.experience')}</p>
+            <p className="text-foreground-muted">{t('authority.experienceDesc')}</p>
+            
+            <div className="mt-6 pt-6 border-t border-border">
+              <h4 className="text-sm font-medium text-foreground mb-4">{t('authority.skills')}</h4>
+              <div className="flex flex-wrap gap-2">
+                {skills.map((skill, index) => (
+                  <span
+                    key={index}
+                    className="px-3 py-1.5 bg-background-tertiary border border-border rounded-full text-xs text-foreground-muted hover:border-primary/30 hover:text-primary transition-colors"
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-      
-      <div className="mt-6 pt-6 border-t border-gray-200">
-        <h4 className="font-semibold text-gray-900 mb-3">{t('authority.skills')}</h4>
-        <div className="flex flex-wrap gap-2">
-          {skills.map((skill, index) => (
-            <span
-              key={index}
-              className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium"
-            >
-              {skill}
-            </span>
-          ))}
+        
+        <div className="lg:w-2/3">
+          <div className="relative pl-8">
+            {/* 时间线 */}
+            <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-primary/50 to-transparent"></div>
+            
+            <div className="space-y-6">
+              {experiences.map((exp, index) => (
+                <div key={index} className="relative">
+                  <div className="absolute -left-8 top-1 w-2 h-2 rounded-full bg-primary shadow-lg shadow-primary/50"></div>
+                  <div className="p-5 rounded-xl bg-background-tertiary border border-border hover:border-border-hover transition-colors">
+                    <div className="text-xs font-medium text-primary mb-2">{exp.year}</div>
+                    <h4 className="font-semibold text-foreground mb-2">{exp.title}</h4>
+                    <p className="text-sm text-foreground-muted leading-relaxed">{exp.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -251,9 +268,15 @@ function ExperienceTimeline() {
 function AuthoritySection() {
   const { t } = useLanguage()
   return (
-    <section className="py-12 md:py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-5">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">{t('authority.title')}</h2>
+    <section className="relative py-24 md:py-32 overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 grid-bg"></div>
+      
+      <div className="relative max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 tracking-tight">{t('authority.title')}</h2>
+          <p className="text-foreground-muted max-w-2xl mx-auto">{t('authority.subtitle') || 'Building trust through proven expertise and results'}</p>
+        </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* 合作项目 - 幻灯片 */}
@@ -272,9 +295,7 @@ function AuthoritySection() {
         </div>
         
         {/* 专注时间 - 时间线 */}
-        <div className="max-w-4xl mx-auto">
-          <ExperienceTimeline />
-        </div>
+        <ExperienceTimeline />
       </div>
     </section>
   )

@@ -56,40 +56,63 @@ function ScarcitySection() {
   }, [language])
 
   return (
-    <section className="py-12 md:py-16 bg-white">
-      <div className="max-w-6xl mx-auto px-5">
+    <section className="relative py-24 md:py-32 overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 grid-bg"></div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] rounded-full"></div>
+      
+      <div className="relative max-w-6xl mx-auto px-6">
         <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">{t('scarcity.title')}</h2>
-          <div className="space-y-6">
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-muted border border-border-accent mb-8">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            <span className="text-sm text-primary font-medium tracking-wide">{t('scarcity.badge') || 'Limited Availability'}</span>
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight text-balance">
+            {t('scarcity.title')}
+          </h2>
+          
+          <div className="space-y-8 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-foreground-muted leading-relaxed">
               {language === 'en' 
-                ? <>We support a maximum of <span className="font-bold text-indigo-600 text-2xl">5</span> Web3 projects per month to ensure sufficient investment in each project.</>
+                ? <>We support a maximum of <span className="font-semibold text-primary text-2xl">5</span> Web3 projects per month to ensure sufficient investment in each project.</>
                 : language === 'zh-CN'
-                ? <>我们每月最多支持 <span className="font-bold text-indigo-600 text-2xl">5 个 Web3 项目</span>，以保证每个项目都有足够投入。</>
-                : <>我們每月最多支持 <span className="font-bold text-indigo-600 text-2xl">5 個 Web3 項目</span>，以保證每個項目都有足夠投入。</>
+                ? <>我们每月最多支持 <span className="font-semibold text-primary text-2xl">5 个 Web3 项目</span>，以保证每个项目都有足够投入。</>
+                : <>我們每月最多支持 <span className="font-semibold text-primary text-2xl">5 個 Web3 項目</span>，以保證每個項目都有足夠投入。</>
               }
             </p>
-            <div className="inline-block bg-gradient-to-r from-red-50 to-orange-50 border-2 border-red-200 rounded-lg p-6 md:p-8 shadow-md">
-              <p className="text-gray-600 mb-4 text-lg font-semibold">{t('scarcity.countdown')}</p>
+            
+            {/* Countdown Timer */}
+            <div className="glass-card rounded-2xl p-8 md:p-10 max-w-2xl mx-auto">
+              <p className="text-foreground-muted mb-6 text-lg font-medium">{t('scarcity.countdown')}</p>
               <div className="flex gap-3 md:gap-4 justify-center">
-                <div className="bg-white rounded-lg p-3 md:p-4 shadow-md min-w-[70px] md:min-w-[80px]">
-                  <div className="text-2xl md:text-3xl font-bold text-red-600">{timeLeft.days}</div>
-                  <div className="text-xs md:text-sm text-gray-600 mt-1">{t('scarcity.days')}</div>
+                <div className="flex flex-col items-center">
+                  <div className="bg-background-tertiary rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[100px] border border-border">
+                    <div className="text-3xl md:text-4xl font-bold gradient-text">{timeLeft.days}</div>
+                  </div>
+                  <div className="text-xs md:text-sm text-foreground-subtle mt-2 uppercase tracking-wider">{t('scarcity.days')}</div>
                 </div>
-                <div className="bg-white rounded-lg p-3 md:p-4 shadow-md min-w-[70px] md:min-w-[80px]">
-                  <div className="text-2xl md:text-3xl font-bold text-red-600">{String(timeLeft.hours).padStart(2, '0')}</div>
-                  <div className="text-xs md:text-sm text-gray-600 mt-1">{t('scarcity.hours')}</div>
+                <div className="flex flex-col items-center">
+                  <div className="bg-background-tertiary rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[100px] border border-border">
+                    <div className="text-3xl md:text-4xl font-bold gradient-text">{String(timeLeft.hours).padStart(2, '0')}</div>
+                  </div>
+                  <div className="text-xs md:text-sm text-foreground-subtle mt-2 uppercase tracking-wider">{t('scarcity.hours')}</div>
                 </div>
-                <div className="bg-white rounded-lg p-3 md:p-4 shadow-md min-w-[70px] md:min-w-[80px]">
-                  <div className="text-2xl md:text-3xl font-bold text-red-600">{String(timeLeft.minutes).padStart(2, '0')}</div>
-                  <div className="text-xs md:text-sm text-gray-600 mt-1">{t('scarcity.minutes')}</div>
+                <div className="flex flex-col items-center">
+                  <div className="bg-background-tertiary rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[100px] border border-border">
+                    <div className="text-3xl md:text-4xl font-bold gradient-text">{String(timeLeft.minutes).padStart(2, '0')}</div>
+                  </div>
+                  <div className="text-xs md:text-sm text-foreground-subtle mt-2 uppercase tracking-wider">{t('scarcity.minutes')}</div>
                 </div>
-                <div className="bg-white rounded-lg p-3 md:p-4 shadow-md min-w-[70px] md:min-w-[80px]">
-                  <div className="text-2xl md:text-3xl font-bold text-red-600">{String(timeLeft.seconds).padStart(2, '0')}</div>
-                  <div className="text-xs md:text-sm text-gray-600 mt-1">{t('scarcity.seconds')}</div>
+                <div className="flex flex-col items-center">
+                  <div className="bg-background-tertiary rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[100px] border border-border">
+                    <div className="text-3xl md:text-4xl font-bold gradient-text">{String(timeLeft.seconds).padStart(2, '0')}</div>
+                  </div>
+                  <div className="text-xs md:text-sm text-foreground-subtle mt-2 uppercase tracking-wider">{t('scarcity.seconds')}</div>
                 </div>
               </div>
-              <p className="text-sm text-gray-500 mt-4">{t('scarcity.deadline')}{deadlineDate}</p>
+              <p className="text-sm text-foreground-subtle mt-6">{t('scarcity.deadline')}{deadlineDate}</p>
             </div>
           </div>
         </div>

@@ -49,6 +49,7 @@ function Layout({ children }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isHeaderVisible, setIsHeaderVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const [isScrolled, setIsScrolled] = useState(false)
   
   const isHomePage = location.pathname === '/' || 
     location.pathname === '/zh-CN' || 
@@ -61,6 +62,7 @@ function Layout({ children }) {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY
+      setIsScrolled(currentScrollY > 20)
       
       // 在页面顶部时始终显示
       if (currentScrollY < 10) {
@@ -95,35 +97,35 @@ function Layout({ children }) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background">
       <header 
-        className={`bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-4 shadow-lg sticky top-0 z-50 transition-transform duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
-        }`}
+        } ${isScrolled ? 'bg-background/80 backdrop-blur-xl border-b border-border' : 'bg-transparent'}`}
       >
-        <div className="max-w-7xl mx-auto px-5">
+        <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div 
-              className="flex items-center gap-2 cursor-pointer"
+              className="flex items-center gap-3 cursor-pointer group"
               onClick={goToHome}
             >
               <img 
                 src="/White logo - no background.svg" 
                 alt="BuildWeb3 Logo" 
-                className="h-16 md:h-20 w-auto"
+                className="h-10 md:h-12 w-auto transition-transform duration-300 group-hover:scale-105"
               />
-              <div className="text-2xl md:text-3xl font-bold">{t('home.brand')}</div>
+              <div className="text-xl md:text-2xl font-semibold text-foreground tracking-tight">{t('home.brand')}</div>
             </div>
             
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               {/* 导航菜单 - 只在首页显示 */}
               {isHomePage && (
                 <>
-                  <nav className="hidden md:flex items-center gap-6">
+                  <nav className="hidden lg:flex items-center gap-8">
                     <a 
                       href="#scarcity" 
-                      className="hover:text-indigo-200 transition-colors duration-200"
+                      className="text-sm text-foreground-muted hover:text-primary transition-colors duration-200 tracking-wide"
                       onClick={(e) => {
                         e.preventDefault()
                         scrollToSection('scarcity')
@@ -133,7 +135,7 @@ function Layout({ children }) {
                     </a>
                     <a 
                       href="#authority" 
-                      className="hover:text-indigo-200 transition-colors duration-200"
+                      className="text-sm text-foreground-muted hover:text-primary transition-colors duration-200 tracking-wide"
                       onClick={(e) => {
                         e.preventDefault()
                         scrollToSection('authority')
@@ -143,7 +145,7 @@ function Layout({ children }) {
                     </a>
                     <a 
                       href="#commitment" 
-                      className="hover:text-indigo-200 transition-colors duration-200"
+                      className="text-sm text-foreground-muted hover:text-primary transition-colors duration-200 tracking-wide"
                       onClick={(e) => {
                         e.preventDefault()
                         scrollToSection('commitment')
@@ -153,7 +155,7 @@ function Layout({ children }) {
                     </a>
                     <a 
                       href="#reciprocity" 
-                      className="hover:text-indigo-200 transition-colors duration-200"
+                      className="text-sm text-foreground-muted hover:text-primary transition-colors duration-200 tracking-wide"
                       onClick={(e) => {
                         e.preventDefault()
                         scrollToSection('reciprocity')
@@ -163,7 +165,7 @@ function Layout({ children }) {
                     </a>
                     <a 
                       href="#easy-access" 
-                      className="hover:text-indigo-200 transition-colors duration-200"
+                      className="text-sm text-foreground-muted hover:text-primary transition-colors duration-200 tracking-wide"
                       onClick={(e) => {
                         e.preventDefault()
                         scrollToSection('easy-access')
@@ -175,16 +177,16 @@ function Layout({ children }) {
 
                   {/* 移动端菜单按钮 */}
                   <button 
-                    className="md:hidden text-white"
+                    className="lg:hidden text-foreground-muted hover:text-foreground transition-colors"
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                   >
                     {mobileMenuOpen ? (
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     ) : (
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
                       </svg>
                     )}
                   </button>
@@ -198,11 +200,11 @@ function Layout({ children }) {
           
           {/* 移动端菜单 - 只在首页显示 */}
           {isHomePage && mobileMenuOpen && (
-            <nav className="md:hidden mt-4 pb-4 border-t border-indigo-400 pt-4">
+            <nav className="lg:hidden mt-6 pb-4 border-t border-border pt-6">
               <div className="flex flex-col gap-4">
                 <a 
                   href="#scarcity" 
-                  className="hover:text-indigo-200 transition-colors duration-200"
+                  className="text-foreground-muted hover:text-primary transition-colors duration-200 py-2"
                   onClick={(e) => {
                     e.preventDefault()
                     scrollToSection('scarcity')
@@ -212,7 +214,7 @@ function Layout({ children }) {
                 </a>
                 <a 
                   href="#authority" 
-                  className="hover:text-indigo-200 transition-colors duration-200"
+                  className="text-foreground-muted hover:text-primary transition-colors duration-200 py-2"
                   onClick={(e) => {
                     e.preventDefault()
                     scrollToSection('authority')
@@ -222,7 +224,7 @@ function Layout({ children }) {
                 </a>
                 <a 
                   href="#commitment" 
-                  className="hover:text-indigo-200 transition-colors duration-200"
+                  className="text-foreground-muted hover:text-primary transition-colors duration-200 py-2"
                   onClick={(e) => {
                     e.preventDefault()
                     scrollToSection('commitment')
@@ -232,7 +234,7 @@ function Layout({ children }) {
                 </a>
                 <a 
                   href="#reciprocity" 
-                  className="hover:text-indigo-200 transition-colors duration-200"
+                  className="text-foreground-muted hover:text-primary transition-colors duration-200 py-2"
                   onClick={(e) => {
                     e.preventDefault()
                     scrollToSection('reciprocity')
@@ -242,7 +244,7 @@ function Layout({ children }) {
                 </a>
                 <a 
                   href="#easy-access" 
-                  className="hover:text-indigo-200 transition-colors duration-200"
+                  className="text-foreground-muted hover:text-primary transition-colors duration-200 py-2"
                   onClick={(e) => {
                     e.preventDefault()
                     scrollToSection('easy-access')
@@ -256,13 +258,23 @@ function Layout({ children }) {
         </div>
       </header>
 
-      <main className="flex-1 py-12 md:py-16">
+      <main className="flex-1 pt-20">
         {children}
       </main>
 
-      <footer className="bg-gray-800 text-white py-8 text-center mt-16">
-        <div className="max-w-6xl mx-auto px-5">
-          <p>&copy; 2026 {t('home.brand')}. {t('common.allRightsReserved')}</p>
+      <footer className="bg-background-secondary border-t border-border py-12 mt-0">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <img 
+                src="/White logo - no background.svg" 
+                alt="BuildWeb3 Logo" 
+                className="h-8 w-auto opacity-60"
+              />
+              <span className="text-foreground-muted text-sm">{t('home.brand')}</span>
+            </div>
+            <p className="text-foreground-subtle text-sm">&copy; 2026 {t('home.brand')}. {t('common.allRightsReserved')}</p>
+          </div>
         </div>
       </footer>
     </div>

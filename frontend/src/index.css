@@ -2,8 +2,189 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Premium Dark Theme Colors */
+  --background: #0a0a0a;
+  --background-secondary: #111111;
+  --background-tertiary: #1a1a1a;
+  --foreground: #fafafa;
+  --foreground-muted: #a1a1aa;
+  --foreground-subtle: #71717a;
+  
+  /* Brand Colors - Emerald/Teal for Web3 */
+  --primary: #10b981;
+  --primary-hover: #059669;
+  --primary-muted: rgba(16, 185, 129, 0.1);
+  --primary-glow: rgba(16, 185, 129, 0.2);
+  
+  /* Accent */
+  --accent: #22d3ee;
+  --accent-muted: rgba(34, 211, 238, 0.1);
+  
+  /* Borders & Dividers */
+  --border: #27272a;
+  --border-hover: #3f3f46;
+  --border-accent: rgba(16, 185, 129, 0.3);
+  
+  /* Status Colors */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  
+  /* Card Surfaces */
+  --card: #111111;
+  --card-hover: #18181b;
+  --card-elevated: #1f1f23;
+}
+
 @layer base {
+  * {
+    border-color: var(--border);
+  }
+  
   body {
-    @apply font-sans antialiased text-gray-800 bg-gray-50;
+    @apply antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--background-secondary);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-hover);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--foreground-subtle);
+  }
+}
+
+@layer components {
+  /* Premium Glass Card */
+  .glass-card {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.03) 0%,
+      rgba(255, 255, 255, 0.01) 100%
+    );
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+  }
+  
+  /* Glow Effect */
+  .glow-primary {
+    box-shadow: 0 0 40px var(--primary-glow), 0 0 80px rgba(16, 185, 129, 0.1);
+  }
+  
+  /* Gradient Text */
+  .gradient-text {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Premium Button */
+  .btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, #059669 100%);
+    color: var(--background);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3);
+  }
+  
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .btn-primary:hover::before {
+    opacity: 1;
+  }
+  
+  /* Secondary Button */
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--foreground);
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-secondary:hover {
+    border-color: var(--primary);
+    background: var(--primary-muted);
+    color: var(--primary);
+  }
+  
+  /* Section Container */
+  .section-container {
+    background: var(--background);
+    position: relative;
+  }
+  
+  .section-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center top, var(--primary-muted) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  /* Subtle Grid Background */
+  .grid-bg {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  
+  /* Animated border gradient */
+  .border-gradient {
+    position: relative;
+    background: var(--card);
+    border-radius: 12px;
+  }
+  
+  .border-gradient::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--primary) 100%);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .border-gradient:hover::before {
+    opacity: 1;
   }
 }
