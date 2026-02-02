@@ -10,7 +10,7 @@ function LanguageSwitcher() {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-background-tertiary border border-border hover:border-border-hover transition-all duration-200 text-foreground-muted hover:text-foreground"
+        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/80 border border-border hover:border-border-hover transition-all duration-200 text-foreground-muted hover:text-foreground shadow-sm"
         aria-label="Change language"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -42,7 +42,7 @@ function LanguageSwitcher() {
                 className={`w-full text-left px-4 py-3 transition-colors duration-200 flex items-center gap-3 ${
                   language === lang 
                     ? 'bg-primary-muted text-primary' 
-                    : 'text-foreground-muted hover:bg-background-tertiary hover:text-foreground'
+                    : 'text-foreground-muted hover:bg-background-secondary hover:text-foreground'
                 }`}
               >
                 {language === lang && (

@@ -10,10 +10,10 @@ function EasyAccessSection() {
   }
 
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden">
+    <section className="relative py-24 md:py-32 overflow-hidden bg-white">
       {/* Background Effects */}
       <div className="absolute inset-0 grid-bg"></div>
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 blur-[120px] rounded-full"></div>
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/8 blur-[120px] rounded-full"></div>
       
       <div className="relative max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
@@ -64,7 +64,7 @@ function EasyAccessSection() {
           
           {/* Tertiary Card */}
           <div className="glass-card rounded-2xl p-8 h-full flex flex-col">
-            <div className="w-10 h-10 rounded-lg bg-background-tertiary flex items-center justify-center mb-6 border border-border">
+            <div className="w-10 h-10 rounded-lg bg-background-secondary flex items-center justify-center mb-6 border border-border">
               <svg className="w-5 h-5 text-foreground-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -78,7 +78,7 @@ function EasyAccessSection() {
               rel="noopener noreferrer"
               className="block w-full"
             >
-              <button className="w-full py-4 rounded-xl font-semibold bg-background-tertiary text-foreground-muted border border-border hover:border-border-hover hover:text-foreground transition-all">
+              <button className="w-full py-4 rounded-xl font-semibold bg-background-secondary text-foreground-muted border border-border hover:border-border-hover hover:text-foreground transition-all">
                 {t('easyAccess.custom.button')}
               </button>
             </a>

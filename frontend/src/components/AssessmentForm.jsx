@@ -203,10 +203,10 @@ function AssessmentForm() {
   const allStepsCompleted = completedSteps === steps.length
 
   return (
-    <section className="relative py-12 md:py-16 min-h-screen overflow-hidden">
+    <section className="relative py-12 md:py-16 min-h-screen overflow-hidden bg-gradient-to-b from-background-secondary to-white">
       {/* Background Effects */}
       <div className="absolute inset-0 grid-bg"></div>
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] rounded-full"></div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/8 blur-[120px] rounded-full"></div>
       
       <div className="relative max-w-4xl mx-auto px-6">
         {/* 返回首页按钮 */}
@@ -237,7 +237,7 @@ function AssessmentForm() {
                 <span className="text-sm text-foreground-muted">{t('assessment.step')} {currentStep + 1} {t('assessment.of')} {steps.length + 1}</span>
                 <span className="text-sm text-foreground-subtle">{t('assessment.completed')} {completedSteps} {t('assessment.of')} {steps.length}</span>
               </div>
-              <div className="w-full bg-background-tertiary rounded-full h-1.5 overflow-hidden">
+              <div className="w-full bg-white rounded-full h-1.5 overflow-hidden">
                 <div
                   className="bg-gradient-to-r from-primary to-accent h-full rounded-full transition-all duration-500 ease-out"
                   style={{ width: `${((currentStep + 1) / (steps.length + 1)) * 100}%` }}
@@ -261,7 +261,7 @@ function AssessmentForm() {
                     value={projectDescription}
                     onChange={(e) => setProjectDescription(e.target.value)}
                     placeholder={t('assessment.projectDescriptionPlaceholder')}
-                    className="w-full h-48 p-5 bg-background-tertiary border border-border rounded-xl focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none transition-all resize-none text-foreground placeholder:text-foreground-subtle"
+                    className="w-full h-48 p-5 bg-white border border-border rounded-xl focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none transition-all resize-none text-foreground placeholder:text-foreground-subtle"
                   />
                   <div className="text-sm text-foreground-subtle text-right">
                     {projectDescription.length} {t('assessment.characters')}
@@ -279,7 +279,7 @@ function AssessmentForm() {
                         className={`w-full text-left p-5 rounded-xl border transition-all duration-300 ${
                           isSelected
                             ? 'border-primary bg-primary-muted'
-                            : 'border-border bg-background-tertiary hover:border-border-hover'
+                            : 'border-border bg-white hover:border-border-hover'
                         }`}
                       >
                         <div className="flex items-center gap-4">
@@ -314,8 +314,8 @@ function AssessmentForm() {
                 disabled={currentStep === 0}
                 className={`px-6 py-3 rounded-xl font-medium transition-all ${
                   currentStep === 0
-                    ? 'bg-background-tertiary text-foreground-subtle cursor-not-allowed'
-                    : 'bg-background-tertiary text-foreground-muted hover:text-foreground border border-border hover:border-border-hover'
+                    ? 'bg-white text-foreground-subtle cursor-not-allowed'
+                    : 'bg-white text-foreground-muted hover:text-foreground border border-border hover:border-border-hover'
                 }`}
               >
                 {t('common.prev')}
@@ -356,7 +356,7 @@ function AssessmentForm() {
                   disabled={submitting}
                   className={`px-6 py-3 rounded-xl font-medium transition-all ${
                     submitting
-                      ? 'bg-background-tertiary text-foreground-subtle cursor-not-allowed'
+                      ? 'bg-white text-foreground-subtle cursor-not-allowed'
                       : 'btn-primary'
                   }`}
                 >
@@ -368,7 +368,7 @@ function AssessmentForm() {
                   disabled={!hasSelection}
                   className={`px-6 py-3 rounded-xl font-medium transition-all ${
                     !hasSelection
-                      ? 'bg-background-tertiary text-foreground-subtle cursor-not-allowed'
+                      ? 'bg-white text-foreground-subtle cursor-not-allowed'
                       : 'btn-primary'
                   }`}
                 >
@@ -418,7 +418,7 @@ function AssessmentForm() {
               </div>
             
               <div className="mb-8">
-                <div className="bg-background-tertiary rounded-xl p-6 border-l-2 border-primary">
+                <div className="bg-white rounded-xl p-6 border-l-2 border-primary">
                   <div className="text-foreground leading-relaxed">
                     {assessmentResult ? (
                       <ReactMarkdown
