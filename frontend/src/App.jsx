@@ -290,15 +290,59 @@ function AppContent() {
     setApiLanguage(language)
   }, [language])
 
+  // 获取当前页面的路径（不含语言前缀）
+  const getPathWithoutLanguage = () => {
+    const path = location.pathname
+    const segments = path.split('/').filter(Boolean)
+    // 如果第一个段是语言代码，移除它
+    if (segments.length > 0 && ['en', 'zh-CN', 'zh-TW'].includes(segments[0])) {
+      return '/' + segments.slice(1).join('/')
+    }
+    return path
+  }
+
+  // 获取网站基础 URL（实际部署时需要替换）
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://buildweb3.com'
+  const pathWithoutLang = getPathWithoutLanguage()
+  
+  // 生成所有语言版本的 URL
+  const urls = {
+    en: `${baseUrl}${pathWithoutLang === '/' ? '' : pathWithoutLang}`,
+    'zh-CN': `${baseUrl}/zh-CN${pathWithoutLang === '/' ? '' : pathWithoutLang}`,
+    'zh-TW': `${baseUrl}/zh-TW${pathWithoutLang === '/' ? '' : pathWithoutLang}`,
+  }
+
+  // 当前语言的规范 URL
+  const canonicalUrl = urls[language]
+
   return (
     <>
       <Helmet>
+        <html lang={language} />
         <title>{t('home.title')}</title>
         <meta name="description" content={t('home.description')} />
         <meta name="keywords" content={t('home.keywords')} />
+        
+        {/* Canonical URL - 防止重复内容 */}
+        <link rel="canonical" href={canonicalUrl} />
+        
+        {/* Hreflang 标签 - 告诉搜索引擎不同语言版本的关系 */}
+        <link rel="alternate" hrefLang="en" href={urls.en} />
+        <link rel="alternate" hrefLang="zh-Hans" href={urls['zh-CN']} />
+        <link rel="alternate" hrefLang="zh-Hant" href={urls['zh-TW']} />
+        <link rel="alternate" hrefLang="x-default" href={urls.en} />
+        
+        {/* Open Graph */}
         <meta property="og:title" content={t('home.title')} />
         <meta property="og:description" content={t('home.description')} />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:locale" content={language === 'zh-CN' ? 'zh_CN' : language === 'zh-TW' ? 'zh_TW' : 'en_US'} />
+        <meta property="og:locale:alternate" content="en_US" />
+        <meta property="og:locale:alternate" content="zh_CN" />
+        <meta property="og:locale:alternate" content="zh_TW" />
+        
+        {/* Icons */}
         <link rel="icon" type="image/png" href="/browser.png" />
         <link rel="apple-touch-icon" href="/iPhone.png" />
         <link rel="icon" type="image/png" sizes="192x192" href="/Android.png" />

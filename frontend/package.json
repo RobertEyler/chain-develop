@@ -7,6 +7,7 @@
     "dev": "vite-react-ssg dev",
     "build": "vite-react-ssg build && npm run build:copy-routes",
     "build:copy-routes": "node scripts/copy-routes.js",
+    "build:verify": "node scripts/verify-build.js",
     "preview": "vite preview"
   },
   "dependencies": {
