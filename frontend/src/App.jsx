@@ -101,7 +101,7 @@ function Layout({ children }) {
       <header 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
-        } ${isScrolled ? 'bg-background/80 backdrop-blur-xl border-b border-border' : 'bg-transparent'}`}
+        } ${isScrolled ? 'bg-white/90 backdrop-blur-xl border-b border-border shadow-sm' : 'bg-white/60 backdrop-blur-sm'}`}
       >
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
@@ -262,18 +262,18 @@ function Layout({ children }) {
         {children}
       </main>
 
-      <footer className="bg-background-secondary border-t border-border py-12 mt-0">
+      <footer className="bg-foreground text-white py-16 mt-0">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
               <img 
                 src="/White logo - no background.svg" 
                 alt="BuildWeb3 Logo" 
-                className="h-8 w-auto opacity-60"
+                className="h-10 w-auto"
               />
-              <span className="text-foreground-muted text-sm">{t('home.brand')}</span>
+              <span className="text-white/80 text-sm font-medium">{t('home.brand')}</span>
             </div>
-            <p className="text-foreground-subtle text-sm">&copy; 2026 {t('home.brand')}. {t('common.allRightsReserved')}</p>
+            <p className="text-white/60 text-sm">&copy; 2026 {t('home.brand')}. {t('common.allRightsReserved')}</p>
           </div>
         </div>
       </footer>

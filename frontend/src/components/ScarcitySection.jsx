@@ -56,10 +56,10 @@ function ScarcitySection() {
   }, [language])
 
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden">
+    <section className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-background-secondary to-background">
       {/* Background Effects */}
       <div className="absolute inset-0 grid-bg"></div>
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] rounded-full"></div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 blur-[120px] rounded-full"></div>
       
       <div className="relative max-w-6xl mx-auto px-6">
         <div className="text-center">
@@ -84,32 +84,32 @@ function ScarcitySection() {
             </p>
             
             {/* Countdown Timer */}
-            <div className="glass-card rounded-2xl p-8 md:p-10 max-w-2xl mx-auto">
+            <div className="glass-card rounded-2xl p-8 md:p-10 max-w-2xl mx-auto transition-all duration-300">
               <p className="text-foreground-muted mb-6 text-lg font-medium">{t('scarcity.countdown')}</p>
               <div className="flex gap-3 md:gap-4 justify-center">
                 <div className="flex flex-col items-center">
-                  <div className="bg-background-tertiary rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[100px] border border-border">
+                  <div className="bg-white rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[100px] border border-border shadow-sm">
                     <div className="text-3xl md:text-4xl font-bold gradient-text">{timeLeft.days}</div>
                   </div>
-                  <div className="text-xs md:text-sm text-foreground-subtle mt-2 uppercase tracking-wider">{t('scarcity.days')}</div>
+                  <div className="text-xs md:text-sm text-foreground-subtle mt-2 uppercase tracking-wider font-medium">{t('scarcity.days')}</div>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="bg-background-tertiary rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[100px] border border-border">
+                  <div className="bg-white rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[100px] border border-border shadow-sm">
                     <div className="text-3xl md:text-4xl font-bold gradient-text">{String(timeLeft.hours).padStart(2, '0')}</div>
                   </div>
-                  <div className="text-xs md:text-sm text-foreground-subtle mt-2 uppercase tracking-wider">{t('scarcity.hours')}</div>
+                  <div className="text-xs md:text-sm text-foreground-subtle mt-2 uppercase tracking-wider font-medium">{t('scarcity.hours')}</div>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="bg-background-tertiary rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[100px] border border-border">
+                  <div className="bg-white rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[100px] border border-border shadow-sm">
                     <div className="text-3xl md:text-4xl font-bold gradient-text">{String(timeLeft.minutes).padStart(2, '0')}</div>
                   </div>
-                  <div className="text-xs md:text-sm text-foreground-subtle mt-2 uppercase tracking-wider">{t('scarcity.minutes')}</div>
+                  <div className="text-xs md:text-sm text-foreground-subtle mt-2 uppercase tracking-wider font-medium">{t('scarcity.minutes')}</div>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="bg-background-tertiary rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[100px] border border-border">
+                  <div className="bg-white rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[100px] border border-border shadow-sm">
                     <div className="text-3xl md:text-4xl font-bold gradient-text">{String(timeLeft.seconds).padStart(2, '0')}</div>
                   </div>
-                  <div className="text-xs md:text-sm text-foreground-subtle mt-2 uppercase tracking-wider">{t('scarcity.seconds')}</div>
+                  <div className="text-xs md:text-sm text-foreground-subtle mt-2 uppercase tracking-wider font-medium">{t('scarcity.seconds')}</div>
                 </div>
               </div>
               <p className="text-sm text-foreground-subtle mt-6">{t('scarcity.deadline')}{deadlineDate}</p>

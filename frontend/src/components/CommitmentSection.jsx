@@ -66,10 +66,10 @@ function CommitmentSection() {
   }
 
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden">
+    <section className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-white to-background-secondary">
       {/* Background Effects */}
       <div className="absolute inset-0 grid-bg"></div>
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/5 blur-[100px] rounded-full"></div>
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/8 blur-[100px] rounded-full"></div>
       
       <div className="relative max-w-4xl mx-auto px-6">
         <div className="text-center mb-12">
@@ -83,7 +83,7 @@ function CommitmentSection() {
             <span className="text-sm text-foreground-muted">{t('commitment.step')} {currentStep + 1} {t('commitment.of')} {steps.length}</span>
             <span className="text-sm text-foreground-subtle">{t('commitment.completed')} {completedSteps} {t('commitment.of')} {steps.length}</span>
           </div>
-          <div className="w-full bg-background-tertiary rounded-full h-1.5 overflow-hidden">
+          <div className="w-full bg-background-secondary rounded-full h-1.5 overflow-hidden">
             <div
               className="bg-gradient-to-r from-primary to-accent h-full rounded-full transition-all duration-500 ease-out"
               style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
@@ -107,7 +107,7 @@ function CommitmentSection() {
                   className={`w-full text-left p-5 rounded-xl border transition-all duration-300 ${
                     isSelected
                       ? 'border-primary bg-primary-muted'
-                      : 'border-border bg-background-tertiary hover:border-border-hover'
+                      : 'border-border bg-background-secondary hover:border-border-hover'
                   }`}
                 >
                   <div className="flex items-center gap-4">
@@ -141,8 +141,8 @@ function CommitmentSection() {
             disabled={currentStep === 0}
             className={`px-6 py-3 rounded-xl font-medium transition-all ${
               currentStep === 0
-                ? 'bg-background-tertiary text-foreground-subtle cursor-not-allowed'
-                : 'bg-background-tertiary text-foreground-muted hover:text-foreground border border-border hover:border-border-hover'
+                ? 'bg-background-secondary text-foreground-subtle cursor-not-allowed'
+                : 'bg-background-secondary text-foreground-muted hover:text-foreground border border-border hover:border-border-hover'
             }`}
           >
             {t('common.prev')}
@@ -176,7 +176,7 @@ function CommitmentSection() {
             disabled={!hasSelection || (isLastStep && !allStepsCompleted)}
             className={`px-6 py-3 rounded-xl font-medium transition-all ${
               !hasSelection || (isLastStep && !allStepsCompleted)
-                ? 'bg-background-tertiary text-foreground-subtle cursor-not-allowed'
+                ? 'bg-background-secondary text-foreground-subtle cursor-not-allowed'
                 : 'btn-primary'
             }`}
           >

@@ -32,7 +32,7 @@ function ProjectsCarousel() {
               index === currentIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            <div className="bg-background-tertiary rounded-xl p-6 h-full flex flex-col justify-center border border-border">
+            <div className="bg-background-secondary rounded-xl p-6 h-full flex flex-col justify-center border border-border">
               <div className="text-xs text-primary font-medium uppercase tracking-wider mb-2">{project.type}</div>
               <h4 className="text-xl font-semibold text-foreground mb-3">{project.name}</h4>
               <p className="text-foreground-muted text-sm leading-relaxed">{project.desc}</p>
@@ -81,7 +81,7 @@ function FundsDisplay() {
           {fundsList.map((fund, index) => (
             <div
               key={index}
-              className="flex items-center justify-between p-4 rounded-xl bg-background-tertiary border border-border hover:border-border-hover transition-colors"
+              className="flex items-center justify-between p-4 rounded-xl bg-background-secondary border border-border hover:border-border-hover transition-colors"
             >
               <span className="text-foreground-muted text-sm">{fund.label}</span>
               <span className="font-semibold text-foreground">{fund.amount}</span>
@@ -149,7 +149,7 @@ function SuccessCases() {
         {cases.map((caseItem, index) => (
           <div
             key={index}
-            className="group p-5 rounded-xl bg-background-tertiary border border-border hover:border-primary/30 transition-all duration-300"
+            className="group p-5 rounded-xl bg-background-secondary border border-border hover:border-primary/30 transition-all duration-300"
           >
             <div className="w-10 h-10 rounded-lg bg-primary-muted flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform">
               {caseItem.icon}
@@ -183,7 +183,7 @@ function TeamDisplay() {
         {team.map((member, index) => (
           <div
             key={index}
-            className="p-5 rounded-xl bg-background-tertiary border border-border hover:border-border-hover transition-all duration-300"
+            className="p-5 rounded-xl bg-background-secondary border border-border hover:border-border-hover transition-all duration-300"
           >
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0 border border-border">
@@ -231,7 +231,7 @@ function ExperienceTimeline() {
                 {skills.map((skill, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1.5 bg-background-tertiary border border-border rounded-full text-xs text-foreground-muted hover:border-primary/30 hover:text-primary transition-colors"
+                    className="px-3 py-1.5 bg-background-secondary border border-border rounded-full text-xs text-foreground-muted hover:border-primary/30 hover:text-primary transition-colors"
                   >
                     {skill}
                   </span>
@@ -250,7 +250,7 @@ function ExperienceTimeline() {
               {experiences.map((exp, index) => (
                 <div key={index} className="relative">
                   <div className="absolute -left-8 top-1 w-2 h-2 rounded-full bg-primary shadow-lg shadow-primary/50"></div>
-                  <div className="p-5 rounded-xl bg-background-tertiary border border-border hover:border-border-hover transition-colors">
+                  <div className="p-5 rounded-xl bg-background-secondary border border-border hover:border-border-hover transition-colors">
                     <div className="text-xs font-medium text-primary mb-2">{exp.year}</div>
                     <h4 className="font-semibold text-foreground mb-2">{exp.title}</h4>
                     <p className="text-sm text-foreground-muted leading-relaxed">{exp.desc}</p>
@@ -268,9 +268,10 @@ function ExperienceTimeline() {
 function AuthoritySection() {
   const { t } = useLanguage()
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden">
+    <section className="relative py-24 md:py-32 overflow-hidden bg-white">
       {/* Background Effects */}
       <div className="absolute inset-0 grid-bg"></div>
+      <div className="absolute top-1/2 right-0 w-[600px] h-[600px] bg-accent/5 blur-[150px] rounded-full -translate-y-1/2"></div>
       
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">

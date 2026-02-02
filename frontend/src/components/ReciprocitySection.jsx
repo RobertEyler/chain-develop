@@ -10,11 +10,11 @@ function ReciprocitySection() {
   }
 
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden">
+    <section className="relative py-24 md:py-32 overflow-hidden bg-background-secondary">
       {/* Background Effects */}
       <div className="absolute inset-0 grid-bg"></div>
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[400px] h-[400px] bg-primary/5 blur-[100px] rounded-full"></div>
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[400px] h-[400px] bg-accent/5 blur-[100px] rounded-full"></div>
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[400px] h-[400px] bg-primary/8 blur-[100px] rounded-full"></div>
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[400px] h-[400px] bg-accent/8 blur-[100px] rounded-full"></div>
       
       <div className="relative max-w-6xl mx-auto px-6">
         <div className="text-center mb-12">
@@ -31,7 +31,7 @@ function ReciprocitySection() {
               {t('reciprocity.benefits').map((benefit, index) => (
                 <div 
                   key={index} 
-                  className="flex items-start gap-4 p-4 rounded-xl bg-background-tertiary border border-border hover:border-border-hover transition-colors"
+                  className="flex items-start gap-4 p-4 rounded-xl bg-white border border-border hover:border-border-hover transition-colors"
                 >
                   <div className="w-8 h-8 rounded-lg bg-primary-muted flex items-center justify-center flex-shrink-0">
                     <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
