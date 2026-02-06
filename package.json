@@ -1,5 +1,4 @@
-{
-  "name": "chain-develop",
+{  "name": "chain-develop",
   "version": "0.1.0",
   "private": true,
   "workspaces": [
@@ -10,6 +9,7 @@
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:blog\"",
     "dev:frontend": "cd frontend && npm run dev",
     "dev:blog": "cd docs && npm run start",
+    "build": "npm run build:cloudflare",
     "build:frontend": "cd frontend && npm run build",
     "build:blog": "cd docs && npm run build",
     "build:merge": "npm run build:frontend && npm run build:blog && node scripts/merge-builds.js",
