@@ -1,0 +1,116 @@
+/**
+ * Custom CSS to match BuildWeb3 brand theme
+ * Matching the main website's teal/emerald design system
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Light theme - matches main site */
+:root {
+  /* Primary brand color - Deep Teal (matching main site) */
+  --ifm-color-primary: #0d9488;
+  --ifm-color-primary-dark: #0c847a;
+  --ifm-color-primary-darker: #0b7d73;
+  --ifm-color-primary-darkest: #09675f;
+  --ifm-color-primary-light: #0ea596;
+  --ifm-color-primary-lighter: #0fac9d;
+  --ifm-color-primary-lightest: #11c2b1;
+  
+  /* Background colors */
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #f8fafc;
+  
+  /* Typography */
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-font-color-base: #0f172a;
+  --ifm-font-color-secondary: #475569;
+  
+  /* Code blocks */
+  --ifm-code-font-size: 95%;
+  --ifm-code-background: #f1f5f9;
+  --docusaurus-highlighted-code-line-bg: rgba(13, 148, 136, 0.1);
+  
+  /* Navbar */
+  --ifm-navbar-background-color: #ffffff;
+  --ifm-navbar-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  
+  /* Links */
+  --ifm-link-color: #0d9488;
+  --ifm-link-hover-color: #0f766e;
+  
+  /* Border radius */
+  --ifm-global-radius: 0.5rem;
+  
+  /* Spacing */
+  --ifm-spacing-horizontal: 1.5rem;
+}
+
+/* Dark theme - adapted for dark mode */
+[data-theme='dark'] {
+  --ifm-color-primary: #14b8a6;
+  --ifm-color-primary-dark: #12a594;
+  --ifm-color-primary-darker: #119c8b;
+  --ifm-color-primary-darkest: #0e8072;
+  --ifm-color-primary-light: #16ccb8;
+  --ifm-color-primary-lighter: #17d5c1;
+  --ifm-color-primary-lightest: #1ae7d3;
+  
+  --ifm-background-color: #0f172a;
+  --ifm-background-surface-color: #1e293b;
+  
+  --ifm-font-color-base: #f1f5f9;
+  --ifm-font-color-secondary: #cbd5e1;
+  
+  --ifm-code-background: #1e293b;
+  --docusaurus-highlighted-code-line-bg: rgba(20, 184, 166, 0.15);
+  
+  --ifm-navbar-background-color: #1e293b;
+}
+
+/* Custom enhancements to match main site aesthetics */
+.navbar {
+  backdrop-filter: blur(8px);
+}
+
+.navbar__title {
+  font-weight: 700;
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Blog post cards */
+.margin-bottom--lg {
+  border-radius: var(--ifm-global-radius);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.margin-bottom--lg:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(13, 148, 136, 0.1);
+}
+
+/* Code blocks styling */
+pre {
+  border-radius: var(--ifm-global-radius);
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom button styles to match main site */
+.button--primary {
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.button--primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+}

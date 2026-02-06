@@ -1,0 +1,49 @@
+web3:
+  label: 'Web3'
+  permalink: '/web3'
+  description: 'Web3 development and technologies'
+
+blockchain:
+  label: 'Blockchain'
+  permalink: '/blockchain'
+  description: 'Blockchain technology and development'
+
+development:
+  label: 'Development'
+  permalink: '/development'
+  description: 'Software development best practices'
+
+solana:
+  label: 'Solana'
+  permalink: '/solana'
+  description: 'Solana blockchain development'
+
+ethereum:
+  label: 'Ethereum'
+  permalink: '/ethereum'
+  description: 'Ethereum and EVM development'
+
+comparison:
+  label: 'Comparison'
+  permalink: '/comparison'
+  description: 'Technology comparisons and benchmarks'
+
+smart-contracts:
+  label: 'Smart Contracts'
+  permalink: '/smart-contracts'
+  description: 'Smart contract development and security'
+
+defi:
+  label: 'DeFi'
+  permalink: '/defi'
+  description: 'Decentralized Finance protocols'
+
+security:
+  label: 'Security'
+  permalink: '/security'
+  description: 'Security best practices and audits'
+
+optimization:
+  label: 'Optimization'
+  permalink: '/optimization'
+  description: 'Performance and gas optimization'

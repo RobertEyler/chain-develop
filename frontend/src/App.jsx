@@ -111,7 +111,7 @@ function Layout({ children }) {
               onClick={goToHome}
             >
               <img 
-                src="/White logo - no background.svg" 
+                src="/Color logo - no background.svg" 
                 alt="BuildWeb3 Logo" 
                 className="h-10 md:h-12 w-auto transition-transform duration-300 group-hover:scale-105"
               />

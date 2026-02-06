@@ -126,7 +126,18 @@ export function LanguageProvider({ children }) {
       }
     }
     
-    return value
+    // 允许返回数组，但不允许返回普通对象
+    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+      console.error(`Translation key ${key} returned an object instead of a string or array`)
+      return key
+    }
+    
+    // 如果是数组，直接返回
+    if (Array.isArray(value)) {
+      return value
+    }
+    
+    return String(value)
   }
 
   // 获取当前路径（不带语言前缀）
