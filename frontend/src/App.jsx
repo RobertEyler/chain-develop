@@ -173,6 +173,12 @@ function Layout({ children }) {
                     >
                       {t('nav.startNow')}
                     </a>
+                    <a 
+                      href="/blog" 
+                      className="text-sm text-foreground-muted hover:text-primary transition-colors duration-200 tracking-wide"
+                    >
+                      {t('nav.blog')}
+                    </a>
                   </nav>
 
                   {/* 移动端菜单按钮 */}
@@ -251,6 +257,12 @@ function Layout({ children }) {
                   }}
                 >
                   {t('nav.startNow')}
+                </a>
+                <a 
+                  href="/blog" 
+                  className="text-foreground-muted hover:text-primary transition-colors duration-200 py-2"
+                >
+                  {t('nav.blog')}
                 </a>
               </div>
             </nav>

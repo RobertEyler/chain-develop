@@ -83,7 +83,7 @@ const config: Config = {
       title: 'BuildWeb3 Blog',
       logo: {
         alt: 'BuildWeb3 Logo',
-        src: 'img/logo.svg',
+        src: 'img/Color logo - no background.svg',
       },
       items: [
         {
@@ -105,11 +105,11 @@ const config: Config = {
           items: [
             {
               label: 'Main Site',
-              href: '/',
+              href: 'https://buildweb3.io/',
             },
             {
               label: 'Free Assessment',
-              href: '/assessment',
+              href: 'https://buildweb3.io/assessment',
             },
           ],
         },
@@ -131,11 +131,7 @@ const config: Config = {
           items: [
             {
               label: 'Twitter',
-              href: 'https://twitter.com/buildweb3',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/buildweb3',
+              href: process.env.TWITTER_URL || 'https://twitter.com/buildweb3',
             },
           ],
         },

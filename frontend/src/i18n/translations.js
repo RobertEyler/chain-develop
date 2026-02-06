@@ -22,6 +22,7 @@ export const translations = {
       beforeStart: 'Before You Start',
       whatWeCanDo: 'What We Can Do',
       startNow: 'Start Now',
+      blog: 'Blog',
     },
     // 首页
     home: {
@@ -323,6 +324,7 @@ export const translations = {
       beforeStart: '开始之前',
       whatWeCanDo: '我们能做什么',
       startNow: '立即开始',
+      blog: '博客',
     },
     // 首页
     home: {
@@ -624,6 +626,7 @@ export const translations = {
       beforeStart: '開始之前',
       whatWeCanDo: '我們能做什麼',
       startNow: '立即開始',
+      blog: '博客',
     },
     // 首页
     home: {
