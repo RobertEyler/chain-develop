@@ -42,18 +42,10 @@ async function mergeBuild() {
       process.exit(1);
     }
 
-    // 4. 创建 _redirects 文件（用于 Cloudflare Pages）
-    console.log('📝 Creating _redirects file...');
-    const redirects = `
-# SPA fallback for frontend
-/*    /index.html   200
-
-# Blog routes
-/blog/*   /blog/index.html   200
-`.trim();
-    
-    await fs.writeFile(path.join(outputDir, '_redirects'), redirects);
-    console.log('✅ _redirects created');
+    // 4. 不需要 _redirects 文件
+    // 因为 vite-react-ssg 和 docusaurus 都是完全静态生成
+    // Cloudflare Pages 会自动服务静态文件
+    console.log('✅ Static files are ready, no redirects needed');
 
     // 5. 创建 _headers 文件（安全头和缓存）
     console.log('📝 Creating _headers file...');
