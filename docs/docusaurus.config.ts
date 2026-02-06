@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'BuildWeb3 Blog',
   tagline: 'Web3 Development Insights & Best Practices',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/browser.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
