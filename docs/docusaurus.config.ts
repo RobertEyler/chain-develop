@@ -83,7 +83,7 @@ const config: Config = {
       title: 'BuildWeb3 Blog',
       logo: {
         alt: 'BuildWeb3 Logo',
-        src: 'img/Color logo - no background.svg',
+        src: 'img/logo_no_background.svg',
       },
       items: [
         {
@@ -131,7 +131,7 @@ const config: Config = {
           items: [
             {
               label: 'Twitter',
-              href: process.env.TWITTER_URL || 'https://twitter.com/buildweb3',
+              href: process.env.TWITTER_URL || 'https://twitter.com/BuildWeb3_io',
             },
           ],
         },
