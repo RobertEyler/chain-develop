@@ -12,7 +12,7 @@
     "build": "npm run build:cloudflare",
     "build:frontend": "cd frontend && npm install && npm run build",
     "build:blog": "cd docs && npm install && npm run build",
-    "build:merge": "npm run build:frontend && npm run build:blog && node scripts/merge-builds.js",
+    "build:merge": "npm run build:frontend && npm run build:blog && node scripts/merge-builds.js && node scripts/merge-sitemaps.js",
     "build:cloudflare": "npm run build:merge"
   },
   "devDependencies": {
