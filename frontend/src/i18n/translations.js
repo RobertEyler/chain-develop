@@ -328,9 +328,9 @@ export const translations = {
     },
     // 首页
     home: {
-      title: '企业区块链开发服务 | Web3开发服务 | BuildWeb3',
-      description: '专业的企业区块链开发服务和Web3开发服务。每月最多支持5个Web3项目，提供技术评估和咨询服务。2分钟获取评估。',
-      keywords: '企业区块链开发服务,web3开发服务,区块链智能合约开发服务,Solana区块链开发服务,区块链开发服务',
+      title: '企业区块链开发定制服务 | Web3定制开发服务 | BuildWeb3',
+      description: '专业的企业区块链定制开发服务和Web3定制开发服务。每月最多支持5个Web3项目，提供技术评估和咨询服务。2分钟获取评估。',
+      keywords: '企业区块链定制开发服务,web3定制开发服务,区块链智能合约定制开发服务,Solana区块链定制开发服务,区块链定制开发服务',
       brand: 'BuildWeb3',
     },
     // 限量服务
@@ -630,9 +630,9 @@ export const translations = {
     },
     // 首页
     home: {
-      title: '企業區塊鏈開發服務 | Web3開發服務 | BuildWeb3',
-      description: '專業的企業區塊鏈開發服務和Web3開發服務。每月最多支持5個Web3項目，提供技術評估和諮詢服務。2分鐘獲取評估。',
-      keywords: '企業區塊鏈開發服務,web3開發服務,區塊鏈智能合約開發服務,Solana區塊鏈開發服務,區塊鏈開發服務',
+      title: '企業區塊鏈開發定製服務 | Web3定製開發服務 | BuildWeb3',
+      description: '專業的企業區塊鏈定製開發服務和Web3定製開發服務。每月最多支持5個Web3項目，提供技術評估和諮詢服務。2分鐘獲取評估。',
+      keywords: '企業區塊鏈定製開發服務,web3定製開發服務,區塊鏈智能合約定製開發服務,Solana區塊鏈定製開發服務,區塊鏈定製開發服務',
       brand: 'BuildWeb3',
     },
     // 限量服务
