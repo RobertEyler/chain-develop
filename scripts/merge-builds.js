@@ -82,6 +82,50 @@ async function mergeBuild() {
     await fs.writeFile(path.join(outputDir, '_headers'), headers);
     console.log('✅ _headers created');
 
+    // 5. 合并 sitemap.xml
+    console.log('📝 Merging sitemap.xml files...');
+    const frontendSitemap = path.join(outputDir, 'sitemap.xml');
+    const blogSitemap = path.join(blogOutput, 'sitemap.xml');
+    
+    let combinedUrls = [];
+    
+    // 读取 frontend sitemap
+    if (await fs.pathExists(frontendSitemap)) {
+      const frontendContent = await fs.readFile(frontendSitemap, 'utf-8');
+      // 提取所有 <url>...</url> 块
+      const urlMatches = frontendContent.match(/<url>[\s\S]*?<\/url>/g) || [];
+      combinedUrls.push(...urlMatches);
+    }
+    
+    // 读取 blog sitemap 并调整路径
+    if (await fs.pathExists(blogSitemap)) {
+      const blogContent = await fs.readFile(blogSitemap, 'utf-8');
+      const urlMatches = blogContent.match(/<url>[\s\S]*?<\/url>/g) || [];
+      // 将 blog 的 URL 从 /blog/xxx 调整为 /blog/xxx（已经包含 /blog/）
+      const adjustedUrls = urlMatches.map(url => {
+        // 如果 URL 中不包含 /blog/，则添加
+        return url.replace(
+          /<loc>https:\/\/buildweb3\.io\//g,
+          '<loc>https://buildweb3.io/blog/'
+        ).replace(
+          /hreflang="[^"]*" href="https:\/\/buildweb3\.io\//g,
+          (match) => match.replace('https://buildweb3.io/', 'https://buildweb3.io/blog/')
+        );
+      });
+      combinedUrls.push(...adjustedUrls);
+    }
+    
+    // 生成合并后的 sitemap
+    const combinedSitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${combinedUrls.join('\n')}
+</urlset>
+`;
+    
+    await fs.writeFile(frontendSitemap, combinedSitemap, 'utf-8');
+    console.log('✅ Sitemap.xml merged');
+
     // 6. 输出统计信息
     console.log('\n📊 Build Statistics:');
     const getSize = async (dir) => {
