@@ -58,6 +58,17 @@ async function mergeBuild() {
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
+# XML files
+/sitemap.xml
+  Content-Type: application/xml
+
+/robots.txt
+  Content-Type: text/plain
+
+# RSS/Atom feeds
+/blog/*.xml
+  Content-Type: application/xml
+
 # Cache static assets
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
